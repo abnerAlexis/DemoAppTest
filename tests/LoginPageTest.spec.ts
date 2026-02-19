@@ -11,7 +11,7 @@ test.describe('Login Page Tests', () => {
 
   test('should login successfully with valid credentials', async ({ page }) => {
     await loginPage.login(process.env.USERNAME || '', process.env.PASSWORD || '');
-    const pageTitle = page.locator('h1');
-    await expect(pageTitle).toBeVisible();
+    const pageHeader = page.locator('h1', { hasText: 'Web Application' });
+    await expect(pageHeader).toBeVisible();
   });
 });
