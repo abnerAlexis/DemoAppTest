@@ -13,6 +13,7 @@ test.describe('Web Application Page Tests', () => {
     await loginPage.login(process.env.USERNAME || '', process.env.PASSWORD || '');
   });
 
+  // Comfirm successful login by checking page title 'Web Application' visibility.
   test('should display the Web Application page title after login', async () => {
     const isTitleVisible = await webAppPage.isPageTitleVisible();
     expect(isTitleVisible).toBeTruthy();
