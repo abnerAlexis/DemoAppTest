@@ -21,6 +21,7 @@ export class WebApplicationPage {
         return await this.todoTitle.isVisible();
     }
 
+    // Task Case 1 - Retrieving all contents in task container to confirm tags "Feature" "High Priority”
     async getContentsOfTasks() {
         const taskDiv = this.parentTodoDiv.locator('div', {
             hasText: 'Implement user authentication'
