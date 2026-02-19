@@ -31,3 +31,5 @@ Install dotenv with this line `npm install dotenv`. This is to keep confidential
 >Click `New repository secret`.
 >Enter your .env file contents as `Name` and `Value`
 >In your project create a file as `.github/workflows/playwright.yml` where environment secrets are included. 
+
+Since this is a demo app, I removed the changes and pushed .env file to the repository. Which shouldn't be done in real life cases.
