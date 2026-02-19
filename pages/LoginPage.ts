@@ -12,7 +12,7 @@ export class LoginPage {
     this.passwordInput = this.page.locator('input[id="password"]');
     this.loginButton = this.page.locator("button[type='submit']");
   }
-
+// Task Case 1: Login to Demo App
   async login(username: string, password: string) {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
