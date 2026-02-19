@@ -9,9 +9,9 @@ test.describe('Login Page Tests', () => {
     await page.goto(process.env.BASE_URL || '');
   });
 
+  // Task Case 1: Login to Demo App, verify the visibility of the title "Web Application"
   test('should login successfully with valid credentials', async ({ page }) => {
     await loginPage.login(process.env.USERNAME || '', process.env.PASSWORD || '');
-    // Test Case 1 - Verifying successful login by checking page title 'Web Application' visibility.
     const pageHeader = page.locator('h1', { hasText: 'Web Application' });
     await expect(pageHeader).toBeVisible();
   });
