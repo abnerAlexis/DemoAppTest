@@ -10,7 +10,7 @@ test.describe('Login Page Tests', () => {
   });
 
   test('should login successfully with valid credentials', async ({ page }) => {
-    await loginPage.login(process.env.USER || '', process.env.PASSWORD || '');
+    await loginPage.login(process.env.USERNAME || '', process.env.PASSWORD || '');
     const pageTitle = page.locator('h1');
     await expect(pageTitle).toBeVisible();
   });

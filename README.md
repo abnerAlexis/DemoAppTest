@@ -19,3 +19,6 @@ Create your project by following the prompts on the terminal.
 ```
 
 Install dotenv with this line `npm install dotenv`. This is to keep confidential information like passwords, API keys, or database strings safe in .env file.
+
+# Create a repository on Github
+Login to your github
