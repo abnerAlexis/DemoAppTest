@@ -19,16 +19,22 @@ test.describe('Web Application Page Tests', () => {
     expect(isTitleVisible).toBeTruthy();
   });
 
-  // Task Case 1 - Verify "Implement user authentication" is in the "To Do" column
+  // To Do Column - Verify the visibility of the title "To Do"
   test('should display the To Do title on the Web Application page', async () => {
+    const isTodoTitleVisible = await webAppPage.isTodoTitleVisible();
+    expect(isTodoTitleVisible).toBeTruthy();
+  });
+
+  // Task Case 1 - Verify "Implement user authentication" is in the "To Do" column
+  test('should display the "Implement user authentication" task in the "To Do" column', async () => {
     await expect(webAppPage.parentTodoDiv.locator('h3', { hasText: 'Implement user authentication' })).toBeVisible();
   });
 
   // Task Case 1 - Confirm tags: "Feature" and "High Priority”
   test('should display "Feature" and "High Priority" tags for the task', async () => {
-    const contents = await webAppPage.getContentsOfTasks();
-    expect(contents).toContain('Feature');
-    expect(contents).toContain('High Priority');
+    const tags = await webAppPage.getTags(webAppPage.tagImplementUserAuth);
+    expect(tags).toContain('Feature');
+    expect(tags).toContain('High Priority');  
   });
 
   // Task Case 2 - Verify "Fix navigation bug" is in the "To Do" column
@@ -41,7 +47,24 @@ test.describe('Web Application Page Tests', () => {
 
   // Task Case 2 - Confirm tags: "Bug”
   test('should display "Bug" tag for the "Fix navigation bug" task', async () => {
-    const contents = await webAppPage.getContentsOfTasks();
-    expect(contents).toContain('Bug');
+    const tags = await webAppPage.getTags(webAppPage.tagFixNavBug);
+    expect(tags).toContain('Bug');
+  });
+
+  // In Progress Column - Verify "Design user profile page" is in the "In Progress" column
+  test('should display the "In Progress" title on the Web Application page', async () => {
+    const isInProgressTitleVisible = await webAppPage.isInProgressTitleVisible();
+    expect(isInProgressTitleVisible).toBeTruthy();
+  });
+
+  //Task Case 3 - Verify "Design system updates" is in the "In Progress" column
+  test('should display the "Design system updates" task in the "In Progress" column', async () => {
+    await expect(webAppPage.parentInProgressDiv.locator('h3', { hasText: 'Design system updates' })).toBeVisible();
+  });
+
+  // Task Case 3 - Confirm tags: "Design”
+  test('should display "Design" tag for the "Design system updates" task', async () => {
+    const tags = await webAppPage.getTags(webAppPage.tagDesign);
+    expect(tags).toContain('Design');
   });
 }); 
