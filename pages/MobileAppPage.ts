@@ -1,6 +1,6 @@
 import {Locator, Page} from '@playwright/test';
 
-export class MobileApplicationPage{
+export class MobileAppPage{
     readonly page: Page;
     readonly pageTitle: Locator;
 
@@ -10,6 +10,7 @@ export class MobileApplicationPage{
     }
 
     async isPageTitleVisible(): Promise<boolean> {
+        console.log(`Checking visibility of page title: ${await this.pageTitle.textContent()}`);
         return await this.pageTitle.isVisible();
     }
 }

@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 
-export class WebApplicationPage {
+export class WebAppPage {
     readonly page: Page;
     readonly pageTitle: Locator;
     readonly todoTitle: Locator;

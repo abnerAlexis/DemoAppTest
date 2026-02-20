@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
-import { WebApplicationPage } from '../pages/WebApplicationPage';
+import { WebAppPage } from '../pages/WebAppPage';
 import { LoginPage } from '../pages/LoginPage';
 
 test.describe('Web Application Page Tests', () => {
-  let webAppPage: WebApplicationPage;
+  let webAppPage: WebAppPage;
   let loginPage: LoginPage;
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    webAppPage = new WebApplicationPage(page);
+    webAppPage = new WebAppPage(page);
     await page.goto(process.env.BASE_URL || '');
     await loginPage.login(process.env.USERNAME || '', process.env.PASSWORD || '');
   });
@@ -34,7 +34,7 @@ test.describe('Web Application Page Tests', () => {
   test('should display "Feature" and "High Priority" tags for the task', async () => {
     const tags = await webAppPage.getTags(webAppPage.tagImplementUserAuth);
     expect(tags).toContain('Feature');
-    expect(tags).toContain('High Priority');  
+    expect(tags).toContain('High Priority');
   });
 
   // Task Case 2 - Verify "Fix navigation bug" is in the "To Do" column
