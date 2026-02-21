@@ -18,9 +18,21 @@ test.describe('Mobile Application Page Tests', () => {
         await page.click('button:has-text("Mobile Application")');
     });
 
+    // Test Case 4: Navigate to "Mobile Application."
     test('should display the Mobile Application page title after login', async ({ page }) => {
         const mobileAppPage = new MobileAppPage(page);
         const isTitleVisible = await mobileAppPage.isPageTitleVisible();
         expect(isTitleVisible).toBeTruthy();
+    });
+
+    // Verify To Do Column - Verify the visibility of the title "To Do"
+    test('should display the To Do title on the Mobile Application page', async ({ page }) => {
+        const isTodoTitleVisible = await mobileAppPage.isTodoTitleVisible();
+        expect(isTodoTitleVisible).toBeTruthy();
+    });
+    
+    // Test Case 4: Verify "Push notification system" is in the "To Do" column.
+    test('should display the "Push notification system" task in the "To Do" column', async () => {
+        await expect(mobileAppPage.parentTodoDiv.locator('h3', { hasText: 'Push notification system' })).toBeVisible();
     });
 });
