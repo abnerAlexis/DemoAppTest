@@ -1,0 +1,22 @@
+[
+  {
+    "scenario": "Valid login",
+    "username": "admin",
+    "password": "password123",
+    "expectSuccess": true
+  },
+  {
+    "scenario": "Wrong password",
+    "username": "wrong_user",
+    "password": "wrong_password",
+    "expectSuccess": false,
+    "expectedError": "Invalid username or password"
+  },
+  {
+    "scenario": "Empty username",
+    "username": "",
+    "password": "password123",
+    "expectSuccess": false,
+    "expectedError": "Please fill out this field'"
+  }
+]
