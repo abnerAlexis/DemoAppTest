@@ -30,7 +30,7 @@ test.describe('Mobile Application Page Tests', () => {
         const isTodoTitleVisible = await mobileAppPage.isTodoTitleVisible();
         expect(isTodoTitleVisible).toBeTruthy();
     });
-    
+
     // Test Case 4: Verify "Push notification system" is in the "To Do" column.
     test('should display the "Push notification system" task in the "To Do" column', async () => {
         await expect(mobileAppPage.parentTodoDiv.locator('h3', { hasText: 'Push notification system' })).toBeVisible();
@@ -40,5 +40,23 @@ test.describe('Mobile Application Page Tests', () => {
     test('should display "Feature" tag for the "Push notification system task', async () => {
         const tags = await mobileAppPage.getTags(mobileAppPage.tagPushNotificationSystem);
         expect(tags).toContain('Feature');
-    })
+    });
+
+    // Verify "In Progress" title is visible.
+    test('should display the "In Progress" title on the Mobile Application page', async () => {
+        const isInProgressTitleVisible = await mobileAppPage.isInProgressTitleVisible();
+        expect(isInProgressTitleVisible).toBeTruthy();
+    });
+
+    //Test Case - 5 Verify "Offline mode" is in the "In Progress" column.
+    test('should display the "Offline mode" task in the "In Progress" column', async () => {
+        await expect(mobileAppPage.parentInProgressDiv.locator('h3', { hasText: 'Offline mode' })).toBeVisible();
+    });
+
+    //Test Case - 5 Confirm tags: "Feature" & "High Priority”
+    test('should display "Feature" and "High Priority" tags for the "Offline mode" task', async () => {
+        const tags = await mobileAppPage.getTags(mobileAppPage.tagOfflineMode);
+        expect(tags).toContain('Feature');
+        expect(tags).toContain('High Priority');
+    });
 });
