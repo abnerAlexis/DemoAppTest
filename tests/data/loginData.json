@@ -1,31 +1,18 @@
-[
-  {
-    "scenario": "Valid login",
+{
+  "envName": "staging",
+  "development": {
+    "baseURL": "placeholder",
+    "username": "placeholder",
+    "password": "placeholder "
+  },
+  "staging": {
+    "baseURL": "https://animated-gingersnap-8cf7f2.netlify.app/",
     "username": "admin",
-    "password": "password123",
-    "expectSuccess": true
+    "password": "password123"
   },
-  {
-    "scenario": "Wrong password",
-    "username": "wrong_user",
-    "password": "wrong_password",
-    "expectSuccess": false,
-    "expectedError": "Invalid username or password"
-  },
-  {
-    "scenario": "Empty username",
-    "username": "",
-    "password": "password123",
-    "expectSuccess": false,
-    "errorType": "html5",
-    "expectedError": "Please fill out this field."
-  },
-  {
-    "scenario": "Empty password",
-    "username": "admin",
-    "password": "",
-    "expectSuccess": false,
-    "errorType": "html5",
-    "expectedError": "Please fill out this field."
+  "production": {
+    "baseURL": "placeholder",
+    "username": "placeholder",
+    "password": "placeholder "
   }
-]
+}
