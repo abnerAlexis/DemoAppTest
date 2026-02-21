@@ -35,4 +35,10 @@ test.describe('Mobile Application Page Tests', () => {
     test('should display the "Push notification system" task in the "To Do" column', async () => {
         await expect(mobileAppPage.parentTodoDiv.locator('h3', { hasText: 'Push notification system' })).toBeVisible();
     });
+
+    // Test Case 4: Confirm tags: "Feature” of Push notification system task.
+    test('should display "Feature" tag for the "Push notification system task', async () => {
+        const tags = await mobileAppPage.getTags(mobileAppPage.tagPushNotificationSystem);
+        expect(tags).toContain('Feature');
+    })
 });

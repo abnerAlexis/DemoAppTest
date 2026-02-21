@@ -24,4 +24,10 @@ export class MobileAppPage {
         console.log(`Checking visibility of To Do title: ${await this.todoTitle.textContent()}`);
         return await this.todoTitle.isVisible();
     }
+
+    async getTags(tagContainer: Locator): Promise<string[]> {
+        const tags = await tagContainer.locator('span').allTextContents();
+        console.log('Tags found:', tags);
+        return tags.map(tag => tag.trim());
+    }   
 }
