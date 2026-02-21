@@ -1,18 +1,28 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import loginData from './data/loginData.json';
 
-test.describe('Login Page Tests', () => {
-  let loginPage: LoginPage;
+test.describe('Login', () => {
+  for (const { scenario, username, password, expectSuccess, errorType, expectedError } of loginData) {
+    test(`${scenario}`, async ({ page }) => {
+      const loginPage = new LoginPage(page);
+      await page.goto(process.env.BASE_URL || '');
+      await loginPage.login(username, password);
 
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    await page.goto(process.env.BASE_URL || '');
-  });
+      if (expectSuccess) {
+        await expect(loginPage.pageTitle).toBeVisible();
+      } else if (errorType === 'html5') {
+        const emptyField = username === ''
+          ? loginPage.usernameInput
+          : loginPage.passwordInput;
 
-  // Test Case 1: Login to Demo App, verify the visibility of the title "Web Application"
-  test('should login successfully with valid credentials', async ({ page }) => {
-    await loginPage.login(process.env.USERNAME || '', process.env.PASSWORD || '');
-    const pageHeader = loginPage.pageTitle;
-    await expect(pageHeader).toBeVisible();
-  });
+        const isInvalid = await emptyField.evaluate(
+          (el: HTMLInputElement) => !el.validity.valid
+        );
+        expect(isInvalid).toBe(true);
+      } else {
+        await expect(loginPage.errorMessage).toContainText(expectedError!);
+      }
+    });
+  }
 });

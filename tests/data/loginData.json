@@ -17,6 +17,16 @@
     "username": "",
     "password": "password123",
     "expectSuccess": false,
-    "expectedError": "Please fill out this field'"
+    "errorType": "html5",
+    "expectedError": "Please fill out this field.",
+    "": "Fill out this field."
+  },
+  {
+    "scenario": "Empty password",
+    "username": "admin",
+    "password": "",
+    "expectSuccess": false,
+    "errorType": "html5",
+    "expectedError": "Please fill out this field."
   }
 ]
