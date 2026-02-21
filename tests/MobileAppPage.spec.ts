@@ -70,4 +70,10 @@ test.describe('Mobile Application Page Tests', () => {
     test('should display the "App icon design" task in the "Done" column', async () => {
         await expect(mobileAppPage.parentDoneDiv.locator('h3', { hasText: 'App icon design' })).toBeVisible();
     });
+
+    // Test Case - 6 Confirm tags: "Design”
+    test('should display "Design" tag for the "App icon design" task', async () => {
+        const tags = await mobileAppPage.getTags(mobileAppPage.tagDesignDiv);
+        expect(tags).toContain('Design');
+    });
 });

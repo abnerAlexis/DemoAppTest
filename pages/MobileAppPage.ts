@@ -9,6 +9,7 @@ export class MobileAppPage {
     readonly parentInProgressDiv: Locator;
     readonly tagOfflineMode: Locator;
     readonly parentDoneDiv: Locator;
+    readonly tagDesignDiv: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -19,6 +20,7 @@ export class MobileAppPage {
         this.parentInProgressDiv = this.page.locator("div:has-text('In Progress')");
         this.tagOfflineMode = this.page.locator('(//div[@class="flex flex-wrap gap-2 mb-3"])[2]');
         this.parentDoneDiv = this.page.locator("div:has-text('Done')");
+        this.tagDesignDiv = this.page.locator('(//div[@class="flex flex-wrap gap-2 mb-3"])[3]');
     }
 
     async isPageTitleVisible(): Promise<boolean> {
