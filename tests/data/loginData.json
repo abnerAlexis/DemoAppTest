@@ -18,8 +18,7 @@
     "password": "password123",
     "expectSuccess": false,
     "errorType": "html5",
-    "expectedError": "Please fill out this field.",
-    "": "Fill out this field."
+    "expectedError": "Please fill out this field."
   },
   {
     "scenario": "Empty password",
