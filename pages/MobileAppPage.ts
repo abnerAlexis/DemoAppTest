@@ -8,6 +8,7 @@ export class MobileAppPage {
     readonly tagPushNotificationSystem: Locator;
     readonly parentInProgressDiv: Locator;
     readonly tagOfflineMode: Locator;
+    readonly parentDoneDiv: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -17,6 +18,7 @@ export class MobileAppPage {
         this.tagPushNotificationSystem = this.page.locator('(//div[@class="flex flex-wrap gap-2 mb-3"])[1]');
         this.parentInProgressDiv = this.page.locator("div:has-text('In Progress')");
         this.tagOfflineMode = this.page.locator('(//div[@class="flex flex-wrap gap-2 mb-3"])[2]');
+        this.parentDoneDiv = this.page.locator("div:has-text('Done')");
     }
 
     async isPageTitleVisible(): Promise<boolean> {
@@ -29,15 +31,21 @@ export class MobileAppPage {
         return await this.todoTitle.isVisible();
     }
 
-    async getTags(tagContainer: Locator): Promise<string[]> {
-        const tags = await tagContainer.locator('span').allTextContents();
-        console.log('Tags found:', tags);
-        return tags.map(tag => tag.trim());
-    }
-
     async isInProgressTitleVisible(): Promise<boolean> {
         const inProgressTitle = this.page.locator('h2', { hasText: 'In Progress' });
         console.log(`Checking visibility of In Progress title: ${await inProgressTitle.textContent()}`);
         return await inProgressTitle.isVisible();
+    }
+
+    async isDoneTitleVisible(): Promise<boolean> {
+        const doneTitle = this.page.locator('h2', { hasText: 'Done' });
+        console.log(`Checking visibility of Done title: ${await doneTitle.textContent()}`);
+        return await doneTitle.isVisible();
+    }
+
+    async getTags(tagContainer: Locator): Promise<string[]> {
+        const tags = await tagContainer.locator('span').allTextContents();
+        console.log('Tags found:', tags);
+        return tags.map(tag => tag.trim());
     }
 }

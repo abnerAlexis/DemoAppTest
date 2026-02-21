@@ -59,4 +59,15 @@ test.describe('Mobile Application Page Tests', () => {
         expect(tags).toContain('Feature');
         expect(tags).toContain('High Priority');
     });
+
+    // Test Case - 6:Verify "Done" title is visible.
+    test('should display the "Done" title on the Mobile Application page', async () => {
+        const isDoneTitleVisible = await mobileAppPage.isDoneTitleVisible();
+        expect(isDoneTitleVisible).toBeTruthy();
+    });
+
+    // Test Case - 6 Verify "App icon design" is in the "Done" column.
+    test('should display the "App icon design" task in the "Done" column', async () => {
+        await expect(mobileAppPage.parentDoneDiv.locator('h3', { hasText: 'App icon design' })).toBeVisible();
+    });
 });
