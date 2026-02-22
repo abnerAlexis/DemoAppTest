@@ -22,5 +22,28 @@ test.describe('Login Page Tests', () => {
     await page.goto(baseURL);
     await loginPage.login(username, password);
     await expect(loginPage.pageTitle).toBeVisible();
-  })
+  });
+
+  test('User should see error message with invalid credentials', async ({ page }) => {
+    await page.goto(baseURL);
+    await loginPage.login('invalidUser', 'invalidPass');
+    await expect(loginPage.errorMessage).toBeVisible();
+    await expect(loginPage.errorMessage).toHaveText('Invalid username or password');
+  });
+
+  test('User should see validation error when username is empty', async ({ page }) => {
+    await page.goto(baseURL);
+    await loginPage.login('', password);
+    await expect(loginPage.usernameInput).toBeFocused();
+    const isInvalid = await loginPage.usernameInput.evaluate((el: HTMLInputElement) => !el.validity.valid)
+    expect(isInvalid).toBe(true);
+  });
+
+  test('User should see validation error when password is empty', async ({ page }) => {
+    await page.goto(baseURL);
+    await loginPage.login(username, '');
+    await expect(loginPage.passwordInput).toBeFocused();
+    const isInvalid = await loginPage.passwordInput.evaluate((el: HTMLInputElement) => !el.validity.valid)
+    expect(isInvalid).toBe(true);
+  });
 });
