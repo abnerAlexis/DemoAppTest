@@ -2,6 +2,7 @@ import test, { expect } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { MobileAppPage } from "../pages/MobileAppPage";
 import { WebAppPage } from "../pages/WebAppPage";
+import loginData from "./data/loginData.json";
 
 test.describe('Mobile Application Page Tests', () => {
     let loginPage: LoginPage;
@@ -9,14 +10,24 @@ test.describe('Mobile Application Page Tests', () => {
     let mobileAppPage: MobileAppPage;
 
     test.beforeEach(async ({ page }) => {
-        loginPage = new LoginPage(page);
-        webAppPage = new WebAppPage(page);
-        mobileAppPage = new MobileAppPage(page);
-        await page.goto(process.env.BASE_URL || '');
-        await loginPage.login(process.env.USERNAME || '', process.env.PASSWORD || '');
-        expect(await webAppPage.isPageTitleVisible()).toBeTruthy();
-        await page.click('button:has-text("Mobile Application")');
-    });
+    loginPage = new LoginPage(page);
+    webAppPage = new WebAppPage(page);
+    mobileAppPage = new MobileAppPage(page);
+    const env = loginData.envName as 'development' | 'staging' | 'production';
+    const credentials = loginData[env];
+    let baseURL: string;
+    let username: string;
+    let password: string;
+
+    baseURL = credentials.baseURL;
+    username = credentials.username;
+    password = credentials.password;
+
+    await page.goto(baseURL);
+    await loginPage.login(username, password);
+    expect(await webAppPage.isPageTitleVisible()).toBeTruthy();
+    await page.click('button:has-text("Mobile Application")');
+  });
 
     // Test Case 4: Navigate to "Mobile Application."
     test('should display the Mobile Application page title after login', async ({ page }) => {
