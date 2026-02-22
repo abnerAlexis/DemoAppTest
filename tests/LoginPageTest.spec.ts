@@ -10,7 +10,7 @@ test.describe('Login Page Tests', () => {
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    const env = loginData.envName as 'staging' | 'production' | 'development';
+    const env = loginData.envName as 'development' | 'staging' | 'production';
     const credentials = loginData[env];
 
     baseURL = credentials.baseURL;
@@ -45,5 +45,29 @@ test.describe('Login Page Tests', () => {
     await expect(loginPage.passwordInput).toBeFocused();
     const isInvalid = await loginPage.passwordInput.evaluate((el: HTMLInputElement) => !el.validity.valid)
     expect(isInvalid).toBe(true);
+  });
+
+  test('User should see validation error when both fields are empty', async ({ page }) => {
+    await page.goto(baseURL);
+    await loginPage.login('', '');
+    await expect(loginPage.usernameInput).toBeFocused();
+    const isUsernameInvalid = await loginPage.usernameInput.evaluate((el: HTMLInputElement) => !el.validity.valid)
+    expect(isUsernameInvalid).toBe(true);
+  });
+
+  test('User should see validation error message when username is empty', async ({ page }) => {
+    await page.goto(baseURL);
+    await loginPage.login('', password);
+    const validationMessage
+      = await loginPage.usernameInput.evaluate((el: HTMLInputElement) => el.validationMessage);
+    expect(validationMessage).toMatch(/fill.*field|fill.*form/i);
+  });
+
+  test('User should see validation error message when password is empty', async ({ page }) => {
+    await page.goto(baseURL);
+    await loginPage.login(username, '');
+    const validationMessage
+      = await loginPage.passwordInput.evaluate((el: HTMLInputElement) => el.validationMessage);
+    expect(validationMessage).toMatch(/fill.*field|fill.*form/i);
   });
 });
