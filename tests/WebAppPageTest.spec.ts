@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { WebAppPage } from '../pages/WebAppPage';
 import { LoginPage } from '../pages/LoginPage';
-import loginData from './data/loginData.json';
 
 test.describe('Web Application Page Tests', () => {
   let webAppPage: WebAppPage;
@@ -10,18 +9,7 @@ test.describe('Web Application Page Tests', () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     webAppPage = new WebAppPage(page);
-    const env = loginData.envName as 'development' | 'staging' | 'production';
-    const credentials = loginData[env];
-    let baseURL: string;
-    let username: string;
-    let password: string;
-
-    baseURL = credentials.baseURL;
-    username = credentials.username;
-    password = credentials.password;
-
-    await page.goto(baseURL);
-    await loginPage.login(username, password);
+    await loginPage.login();
   });
 
   // Comfirm successful login by checking page title 'Web Application' visibility.

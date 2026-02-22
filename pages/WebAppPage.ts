@@ -31,7 +31,7 @@ export class WebAppPage {
 
     async getTags(tagContainer: Locator): Promise<string[]> {
         const tags = await tagContainer.locator('span').allTextContents();
-        console.log('Tags found:', tags);
+        //console.log('Tags found:', tags);
         return tags.map(tag => tag.trim());
     }
 
@@ -40,5 +40,4 @@ export class WebAppPage {
         const inProgressTitle = this.page.locator('h2', { hasText: 'In Progress' });
         return await inProgressTitle.isVisible();
     }
-
 }

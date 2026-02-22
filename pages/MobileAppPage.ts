@@ -24,30 +24,30 @@ export class MobileAppPage {
     }
 
     async isPageTitleVisible(): Promise<boolean> {
-        console.log(`Checking visibility of page title: ${await this.pageTitle.textContent()}`);
+        //console.log(`Checking visibility of page title: ${await this.pageTitle.textContent()}`);
         return await this.pageTitle.isVisible();
     }
 
     async isTodoTitleVisible(): Promise<boolean> {
-        console.log(`Checking visibility of To Do title: ${await this.todoTitle.textContent()}`);
+        //console.log(`Checking visibility of To Do title: ${await this.todoTitle.textContent()}`);
         return await this.todoTitle.isVisible();
     }
 
     async isInProgressTitleVisible(): Promise<boolean> {
         const inProgressTitle = this.page.locator('h2', { hasText: 'In Progress' });
-        console.log(`Checking visibility of In Progress title: ${await inProgressTitle.textContent()}`);
+        //console.log(`Checking visibility of In Progress title: ${await inProgressTitle.textContent()}`);
         return await inProgressTitle.isVisible();
     }
 
     async isDoneTitleVisible(): Promise<boolean> {
         const doneTitle = this.page.locator('h2', { hasText: 'Done' });
-        console.log(`Checking visibility of Done title: ${await doneTitle.textContent()}`);
+        //console.log(`Checking visibility of Done title: ${await doneTitle.textContent()}`);
         return await doneTitle.isVisible();
     }
 
     async getTags(tagContainer: Locator): Promise<string[]> {
         const tags = await tagContainer.locator('span').allTextContents();
-        console.log('Tags found:', tags);
+        //console.log('Tags found:', tags);
         return tags.map(tag => tag.trim());
     }
 }
